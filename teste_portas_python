@@ -1,0 +1,24 @@
+import socket
+
+menu = 's'
+while (menu != 'x'):
+	menu = input("deseja continuar os testes? Digite S para continuar, e X para sair:  ")	
+		
+	if (menu  == "s"):
+		alvo = input("Qual site deseja verificar:  ")	
+		
+		alvo1 = str(alvo)
+		ports = [21,22,25,80,443,445,3306]
+
+		for port in ports:
+			client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			client.settimeout(0.2)
+			code = client.connect_ex((alvo1, port))
+
+			if code == 0:
+				print(port, "OPEN")
+			else:
+				print(port, "CLOSED")
+	else:
+		print("Saindo")
+		exit
